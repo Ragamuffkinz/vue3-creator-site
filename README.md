@@ -1,99 +1,82 @@
-# Artist Portfolio — Vue 3 + TypeScript
+# Nuxt Portfolio Website
 
-A clean, editorial-aesthetic portfolio site for an artist/product creator. Built with Vue 3, TypeScript, and Vue Router. No backend, no Pinia, no payment processing.
+## Setup
 
-## Tech Stack
-
-- **Vue 3** (Composition API + `<script setup>`)
-- **TypeScript** — fully typed throughout
-- **Vue Router 4** — client-side routing with lazy-loaded views
-- **Vite** — fast dev server and build tool
-- **No state management** — static data via plain `.ts` files
-- **No backend** — all content is in `src/data/`
-
-## Getting Started
+Make sure to install dependencies:
 
 ```bash
+# npm
 npm install
-npm run dev       # dev server at http://localhost:5173
-npm run build     # production build to dist/
-npm run preview   # preview production build
 ```
 
-## Project Structure
+## Development Server
 
-```
-src/
-├── assets/
-│   └── main.css          # Design tokens, global styles
-├── components/
-│   ├── SiteNav.vue        # Fixed top nav with mobile drawer
-│   └── SiteFooter.vue     # Footer
-├── data/
-│   ├── about.ts           # Bio, skills, timeline, contact/socials
-│   ├── artwork.ts         # Gallery collections + artwork items
-│   └── products.ts        # Product listings
-├── router/
-│   └── index.ts           # Vue Router config
-├── types/
-│   └── index.ts           # TypeScript interfaces
-├── views/
-│   ├── HomeView.vue        # Hero landing + featured works
-│   ├── AboutView.vue       # Bio, skills, timeline, contact links
-│   ├── ArtworkView.vue     # Multi-gallery with lightbox
-│   └── ProductsView.vue    # Filterable product grid + detail modal
-├── App.vue
-└── main.ts
+Start the development server on `http://localhost:3000`:
+
+```bash
+# npm
+npm run dev
 ```
 
-## Customising Content
+## Static Build
 
-All content lives in `src/data/`. You never need to touch the components or views for basic content updates.
+Generate the static site:
 
-### Your info (`src/data/about.ts`)
-- `artistName` — your display name (used in nav, footer, page titles)
-- `artistTitle` — tagline under your name
-- `artistBio` — multi-paragraph bio (separate paragraphs with a blank line)
-- `skillGroups` — grouped skill cards for the Expertise section
-- `timeline` — experience/education entries (most recent first)
-- `contactInfo` — email + social links with platform icons
+```bash
+# npm
+npm run generate
+```
 
-### Artwork galleries (`src/data/artwork.ts`)
-Each entry in `artworkGalleries` becomes a full section on the Artwork page with its own grid. Add/remove galleries and items freely. Fields: `id`, `title`, `description`, `coverImageUrl`, `items[]`.
+## Navigating the Project
 
-### Products (`src/data/products.ts`)
-Each entry in `products` is a product card. Key fields:
-- `buyUrl` — if present, shows a **"Buy Here ↗"** link (external shop)
-- `soldOut: true` — shows a "Sold Out" badge and suppresses the buy link
-- `price` — display string, e.g. `"$12.00"`
-- `category` — used for the filter bar: `'pin' | 'print' | 'sticker' | 'bundle' | 'other'`
+If you're forking or reusing this site for your own project, here's the general layout and how content is organized.
 
-### Images
-Replace the `placehold.co` URLs with real image paths. You can:
-- Put images in `public/images/` and reference them as `/images/myfile.jpg`
-- Use absolute URLs to a CDN or image host
+### Top-level structure
 
-## Design System
+```
+app/
+  assets/          # where the CSS lives for colors
+  components/
+  composables/
+  data/            # generally one .ts file per page
+  pages/           # one .vue file per route
+  types/
+  app.config.ts
+  app.vue
+public/            # store static assets here; generally per-page
+  ...
+  favicon.ico
+  robots.txt
+nuxt.config.ts
+tsconfig.json
+package.json
+```
 
-Defined in `src/assets/main.css` via CSS custom properties:
+### Per-page pattern
 
-| Variable | Value | Use |
-|---|---|---|
-| `--ink` | `#0e0c0a` | Dark background |
-| `--paper` | `#f5f0e8` | Primary text |
-| `--rust` | `#c0512b` | Accent / CTA |
-| `--rust-light` | `#d96b42` | Hover accent |
-| `--gold` | `#c8922a` | Secondary accent |
-| `--ash` | `#5a524a` | Body text |
-| `--mist` | `#8a8078` | Subdued / labels |
+Each page in `app/pages/` (e.g. `art.vue`, `books.vue`, `characters.vue`) generally has a matching `.ts` file of the same name in `app/data/`, plus a matching folder in `public/`:
 
-Fonts loaded from Google Fonts: **Playfair Display** (display/headings) · **DM Sans** (body) · **DM Mono** (labels, UI).
+- **`app/data/<page>.ts`** — manifest and text content for that page. You'll also need to point references to images in /public here.
+- **`public/<page>/`** — the actual image assets for that page. Need to be referenced in /data somewhere.
 
-## Deployment
+So to update text or entries for a page, start in `app/data/<page>.ts`. To swap out or add images, drop them into `public/<page>/` and update the file path reference in the data file as-needed.
 
-This is a static site — `npm run build` outputs to `dist/`. Deploy to any static host:
-- **Netlify**: drag-and-drop the `dist/` folder or connect git
-- **Vercel**: `vercel --prod` from the project root
-- **GitHub Pages**: use the `gh-pages` package or GitHub Actions
+Each page in /pages also automatically routes and updates the header navigation.
 
-For history-mode routing (no `#` in URLs) you may need a redirect rule on your host so all routes serve `index.html`. Netlify: add a `_redirects` file; Vercel: add a `vercel.json`.
+### Quick reference
+
+| What you want to change  | Where to look                                                       |
+| ------------------------ | ------------------------------------------------------------------- |
+| Page text / entries      | `app/data/<page>.ts`                                                |
+| Images                   | `public/<page>/`, referenced from the matching `app/data/<page>.ts` |
+| Site-wide footer content | `app/data/footer.ts`                                                |
+| Homepage                 | `app/data/index.ts`, `app/pages/index.vue`                          |
+| Page layout / components | `app/components/`, `app/pages/`                                     |
+| Shared logic             | `app/composables/`                                                  |
+| Types                    | `app/types/`                                                        |
+
+## Look & Feel
+
+- **Fonts:** Bricolage Grotesque (headings) and Hanken Grotesk (body), set in `--font-display` / `--font-sans` at the top of `app/assets/css/main.css`. `@nuxt/fonts` (included with Nuxt UI) downloads and self-hosts them at build time, so the first `npm run dev` / `generate` needs internet access.
+- **Colors & surfaces:** palette plus light/dark surface tokens live in `app/assets/css/main.css`.
+- **Motion:** page transitions are the `.page-*` classes; the load sequence is `.hero-in` (order set with `[--i:N]`); scroll-in is the `v-reveal` directive in `app/plugins/reveal.ts`. All of it switches off under `prefers-reduced-motion`.

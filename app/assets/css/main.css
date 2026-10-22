@@ -1,0 +1,473 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+    /* Type: Bricolage Grotesque for display, Hanken Grotesk for reading */
+    --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system,
+        "Segoe UI", sans-serif;
+    --font-display: "Bricolage Grotesque", "Hanken Grotesk", ui-sans-serif,
+        system-ui, sans-serif;
+
+    /* grape: dusky violet (Gengar / Digivice purples), softened */
+    --color-grape-50: #f6f4fc;
+    --color-grape-100: #ece8f8;
+    --color-grape-200: #dcd4f1;
+    --color-grape-300: #c3b6e6;
+    --color-grape-400: #a692d6;
+    --color-grape-500: #8c74c6;
+    --color-grape-600: #7759b0;
+    --color-grape-700: #644a93;
+    --color-grape-800: #543f78;
+    --color-grape-900: #473862;
+    --color-grape-950: #2c2142;
+
+    /* ember: warm apricot-orange (Agumon / Charmander), softened */
+    --color-ember-50: #fff6ee;
+    --color-ember-100: #ffe9d6;
+    --color-ember-200: #fdd3b0;
+    --color-ember-300: #f9b782;
+    --color-ember-400: #f39a59;
+    --color-ember-500: #e8803f;
+    --color-ember-600: #d2672b;
+    --color-ember-700: #ad5125;
+    --color-ember-800: #8b4224;
+    --color-ember-900: #723921;
+    --color-ember-950: #3d1b0e;
+
+    /* ink: cool blue-slate neutrals with a hint of indigo */
+    --color-ink-50: #f6f7fa;
+    --color-ink-100: #eceef3;
+    --color-ink-200: #d9dce6;
+    --color-ink-300: #b9bfcf;
+    --color-ink-400: #929ab1;
+    --color-ink-500: #6f7891;
+    --color-ink-600: #565e75;
+    --color-ink-700: #434a5e;
+    --color-ink-800: #2c3140;
+    --color-ink-900: #1a1d28;
+    --color-ink-950: #0d0f16;
+}
+
+/* ------------------------------------------------------------------ */
+/* Surface + text tokens (lavender-tinted paper / deep indigo night)    */
+/* ------------------------------------------------------------------ */
+:root {
+    --ui-radius: 0.625rem;
+    --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    --ui-primary: var(--color-ember-600);
+    --ui-secondary: var(--color-grape-600);
+
+    --ui-bg: #faf9fd;
+    --ui-bg-muted: #f3f1f9;
+    --ui-bg-elevated: #ece9f6;
+    --ui-bg-accented: #e0dcef;
+    --ui-border: #e5e1f1;
+    --ui-border-muted: #eeebf7;
+    --ui-border-accented: #d3cde7;
+
+    --ui-text-dimmed: var(--color-ink-400);
+    --ui-text-muted: var(--color-ink-600);
+    --ui-text-toned: var(--color-ink-700);
+    --ui-text: var(--color-ink-800);
+    --ui-text-highlighted: var(--color-ink-950);
+}
+
+.dark {
+    --ui-primary: var(--color-ember-400);
+    --ui-secondary: var(--color-grape-400);
+
+    --ui-bg: #0e0e18;
+    --ui-bg-muted: #151523;
+    --ui-bg-elevated: #1c1c2d;
+    --ui-bg-accented: #28283d;
+    --ui-border: #262639;
+    --ui-border-muted: #1e1e2f;
+    --ui-border-accented: #34344d;
+
+    --ui-text-dimmed: var(--color-ink-500);
+    --ui-text-muted: var(--color-ink-300);
+    --ui-text-toned: var(--color-ink-200);
+    --ui-text: var(--color-ink-100);
+    --ui-text-highlighted: #ffffff;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base typography                                                      */
+/* ------------------------------------------------------------------ */
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    font-feature-settings: "kern", "liga";
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+}
+
+h1 {
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    font-weight: 800;
+}
+
+h2 {
+    letter-spacing: -0.028em;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+h3,
+h4 {
+    letter-spacing: -0.015em;
+    font-weight: 650;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+::selection {
+    background: color-mix(in oklab, var(--ui-primary) 28%, transparent);
+}
+
+:focus-visible {
+    outline: 2px solid var(--ui-primary);
+    outline-offset: 3px;
+    border-radius: 0.375rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ambient background: slow-drifting colour + a whisper of grain        */
+/* ------------------------------------------------------------------ */
+.ambient {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.ambient__orb {
+    position: absolute;
+    width: 72vmax;
+    height: 72vmax;
+    border-radius: 50%;
+    opacity: 0.3;
+    will-change: transform;
+}
+
+.ambient__orb--grape {
+    top: -34vmax;
+    left: -24vmax;
+    background: radial-gradient(
+        closest-side,
+        color-mix(in oklab, var(--color-grape-300) 80%, transparent),
+        transparent
+    );
+    animation: drift-a 32s ease-in-out infinite alternate;
+}
+
+.ambient__orb--ember {
+    top: -30vmax;
+    right: -34vmax;
+    background: radial-gradient(
+        closest-side,
+        color-mix(in oklab, var(--color-ember-300) 75%, transparent),
+        transparent
+    );
+    animation: drift-b 38s ease-in-out infinite alternate;
+}
+
+.ambient__orb--low {
+    bottom: -46vmax;
+    left: 12vmax;
+    opacity: 0.2;
+    background: radial-gradient(
+        closest-side,
+        color-mix(in oklab, var(--color-grape-300) 70%, transparent),
+        transparent
+    );
+    animation: drift-a 44s ease-in-out infinite alternate-reverse;
+}
+
+.dark .ambient__orb {
+    opacity: 0.2;
+}
+
+.dark .ambient__orb--grape {
+    background: radial-gradient(
+        closest-side,
+        color-mix(in oklab, var(--color-grape-600) 85%, transparent),
+        transparent
+    );
+}
+
+.dark .ambient__orb--ember {
+    opacity: 0.14;
+    background: radial-gradient(
+        closest-side,
+        color-mix(in oklab, var(--color-ember-600) 80%, transparent),
+        transparent
+    );
+}
+
+.dark .ambient__orb--low {
+    opacity: 0.14;
+    background: radial-gradient(
+        closest-side,
+        color-mix(in oklab, var(--color-grape-700) 80%, transparent),
+        transparent
+    );
+}
+
+.ambient::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dark .ambient::after {
+    opacity: 0.07;
+    mix-blend-mode: soft-light;
+}
+
+@keyframes drift-a {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(7vmax, 5vmax, 0) scale(1.1);
+    }
+}
+
+@keyframes drift-b {
+    from {
+        transform: translate3d(0, 0, 0) scale(1.05);
+    }
+    to {
+        transform: translate3d(-6vmax, 6vmax, 0) scale(0.95);
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* Page transitions                                                     */
+/* ------------------------------------------------------------------ */
+.page-enter-active {
+    transition:
+        opacity 0.45s var(--ease-out-soft),
+        transform 0.45s var(--ease-out-soft);
+}
+
+.page-leave-active {
+    transition: opacity 0.18s ease;
+}
+
+.page-enter-from {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.page-leave-to {
+    opacity: 0;
+}
+
+/* Swap used when the store filter changes the product grid */
+.swap-enter-active {
+    transition: opacity 0.3s var(--ease-out-soft);
+}
+
+.swap-leave-active {
+    transition: opacity 0.14s ease;
+}
+
+.swap-enter-from,
+.swap-leave-to {
+    opacity: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Page-load sequence: one staggered entrance per page                  */
+/* Set the order with [--i:N] on each element.                          */
+/* ------------------------------------------------------------------ */
+.hero-in {
+    animation: hero-in 0.95s var(--ease-out-soft) backwards;
+    animation-delay: calc(var(--i, 0) * 90ms + 120ms);
+}
+
+@keyframes hero-in {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+        filter: blur(8px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+    }
+}
+
+/* Featured image on the home page: wipes up, then settles from a zoom */
+.hero-media {
+    position: relative;
+    border-radius: 1.75rem;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1px var(--ui-border),
+        0 30px 60px -28px color-mix(in oklab, var(--color-grape-700) 55%, transparent),
+        0 12px 28px -18px color-mix(in oklab, var(--color-ember-600) 45%, transparent);
+    animation: media-wipe 1.3s var(--ease-out-soft) 0.55s backwards;
+}
+
+.hero-media img {
+    animation: media-settle 1.8s var(--ease-out-soft) 0.55s backwards;
+    transition: transform 1.2s var(--ease-out-soft);
+}
+
+.hero-media:hover img {
+    transform: scale(1.025);
+}
+
+@keyframes media-wipe {
+    from {
+        clip-path: inset(100% 0 0 0 round 1.75rem);
+    }
+    to {
+        clip-path: inset(0 0 0 0 round 1.75rem);
+    }
+}
+
+@keyframes media-settle {
+    from {
+        transform: scale(1.14);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* Staggered cards (store grid, gallery thumbnails)                     */
+/* backwards fill-mode so hover transforms still work afterwards        */
+/* ------------------------------------------------------------------ */
+.card-in {
+    animation: card-in 0.7s var(--ease-out-soft) backwards;
+    animation-delay: calc(var(--i, 0) * 55ms);
+}
+
+@keyframes card-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.album-open {
+    animation: album-open 0.5s var(--ease-out-soft) backwards;
+}
+
+@keyframes album-open {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.lightbox-in {
+    animation: lightbox-in 0.55s var(--ease-out-soft) backwards;
+}
+
+@keyframes lightbox-in {
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+        filter: blur(6px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* v-reveal (scroll-in)                                                 */
+/* ------------------------------------------------------------------ */
+.reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+        opacity 0.9s var(--ease-out-soft),
+        transform 0.9s var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Shared hover polish                                                  */
+/* ------------------------------------------------------------------ */
+.lift {
+    transition:
+        transform 0.4s var(--ease-out-soft),
+        box-shadow 0.4s var(--ease-out-soft),
+        background-color 0.3s ease,
+        --tw-ring-color 0.3s ease;
+}
+
+.lift:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 18px 36px -18px color-mix(in oklab, var(--color-grape-700) 45%, transparent),
+        0 6px 14px -8px color-mix(in oklab, var(--color-ember-600) 30%, transparent);
+}
+
+.dark .lift:hover {
+    box-shadow:
+        0 18px 40px -16px rgb(0 0 0 / 0.7),
+        0 0 0 1px color-mix(in oklab, var(--ui-primary) 25%, transparent);
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion: keep everything, drop the movement                   */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+    }
+
+    .ambient__orb {
+        animation: none !important;
+    }
+}
