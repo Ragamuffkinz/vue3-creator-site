@@ -12,13 +12,7 @@ export const heroInfo: HeroInfo = {
 };
 
 export const HeroLinks = ref<ButtonProps[]>([
-    {
-        icon: "simple-icons:bandcamp",
-        to: "https://bandcamp.com/slimymonz",
-        label: "Bandcamp",
-        class:
-            "bg-[#007C9E] hover:bg-[#007C9E] text-white rounded-full px-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110",
-    },
+
     {
         icon: "simple-icons:bluesky",
         to: "https://bsky.app/profile/monz.us",
@@ -39,13 +33,6 @@ export const HeroLinks = ref<ButtonProps[]>([
         label: "E-Mail",
         class:
             "bg-[#e64134] hover:bg-[#e64134] text-white rounded-full px-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110",
-    },
-    {
-        icon: "simple-icons:furaffinity",
-        to: "https://www.furaffinity.net/user/slimymonz",
-        label: "FurAffinity",
-        class:
-            "bg-[#faaf3a] hover:bg-[#faaf3a] text-ink-950 rounded-full px-5 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110",
     },
     {
         icon: "simple-icons:mastodon",

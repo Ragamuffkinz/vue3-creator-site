@@ -12,7 +12,10 @@ export const heroInfo: HeroInfo = {
 const albumManifest: AlbumManifest = {
     path: "/gallery",
     albums: [
-        { title: "2009", path: "2009", imageCount: 6 },
+        { title: "Grayscale", path: "grayscale", imageCount: 13 },
+        { title: "Pins", path: "pins", imageCount: 26 },
+        { title: "Prints", path: "prints", imageCount: 8 },
+        { title: "Renders", path: "renders", imageCount: 11 },
     ],
 };
 

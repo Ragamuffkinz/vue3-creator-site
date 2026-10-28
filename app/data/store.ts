@@ -32,7 +32,7 @@ export const products: Product[] = [
         imageUrl: sunset("NxEIAsIz8r8"),
         category: "pin",
         price: "$12.00",
-        buyUrl: SHOP_URL,
+        buyUrl: "https://www.ebay.com/item/29387503895",
         tags: ["digimon", "enamel pin"],
     },
     {
