@@ -3,7 +3,7 @@ import type { NavigationMenuItem } from "@nuxt/ui";
 export const footerLinks: NavigationMenuItem[] = [
     {
         label: "Source",
-        to: "https://codeberg.org/Monz/nuxt-monz-site",
+        to: "https://github.com/Ragamuffkinz/vue3-creator-site",
         target: "_blank",
     },
     {
@@ -25,28 +25,28 @@ export const footerLinks: NavigationMenuItem[] = [
 
 export const footerButtons = [
     {
+
+        label: "BlueSky",
+        to: "https://bsky.app/profile/ragamuffkinz.bsky.social",
         icon: "simple-icons:bluesky",
-        to: "https://bsky.app/profile/monz.us",
-        label: "Bluesky",
+        
     },
     {
-        icon: "simple-icons:codeberg",
-        to: "https://codeberg.org/Monz?tab=overview",
-        label: "Codeberg",
-    },
-    {
-        icon: "lucide:mail",
-        to: "mailto:website@monz.us",
         label: "E-Mail",
+        to: "mailto:ragamuffkinz@gmail.com",
+        icon: "lucide:mail",
+        
     },
     {
-        icon: "simple-icons:furaffinity",
-        to: "https://www.furaffinity.net/user/slimymonz",
-        label: "FurAffinity",
+        label: "Instagram",
+        to: "https://www.instagram.com/ragamuffkinz?rpxt=ajEwNmF1bmx1OWdu&utm_source=qr",
+        icon: "simple-icons:instagram",
+       
     },
+
     {
-        icon: "simple-icons:mastodon",
-        to: "https://yiff.life/@slimymonz",
-        label: "Mastodon",
+        label: "Ko-fi",
+        to: "https://ko-fi.com/ragamuffkinz",
+        icon: "simple-icons:kofi",
     },
 ];

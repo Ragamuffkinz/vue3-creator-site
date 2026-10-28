@@ -142,14 +142,21 @@ export const skillGroups = [
 // Oldest first, so the last item is the current one
 export const timelineItems = ref<TimelineItem[]>([
     {
-        date: "2017 - 2019",
-        title: "AA, Illustration",
+        date: "2010 - 2023",
+        title: "Freelance Graphic Designer & Illustrator",
         description:
-            "Your University. Focused on character design, sequential art, and concept development. Senior thesis explored narrative illustration in merchandise design.",
+            "Produced graphics for public and private entities with a focus on print ready designs for clothing, accessories, coloring books, and stickers as well as physical art (such as a mural for Poinciana Elementary).",
+        icon: "lucide:graduation-cap",
+    },   
+    {
+        date: "2012 - 2014, 2016 - 2018",
+        title: "General AA, Graphics & Animation Education",
+        description:
+            "Received schooling through Valencia for general studies with a heavy focus on graphic design. Gained education later through IADT/Sanford Brown for 2D/3D Animation, Storyboarding, Character Design, and Prototyping.",
         icon: "lucide:graduation-cap",
     },
     {
-        date: "2019 - 2020",
+        date: "2018 - 2021",
         title: "Production Assistant",
         description:
             "Creative Goods Studio. Assisted in production coordination, vendor communication, and fulfillment operations for a boutique merchandise studio.",
@@ -164,9 +171,9 @@ export const timelineItems = ref<TimelineItem[]>([
     },
     {
         date: "2022 - Present",
-        title: "Independent Artist & Product Creator",
+        title: "Independent Artist & Published Illustrator",
         description:
-            "Launched and managed multiple successful product lines including enamel pins, art prints, and sticker sheets. Handled all stages from design through delivery.",
+            "Launched and managed multiple successful product lines including enamel pins, art prints, and sticker sheets. Handled all stages from design through delivery. Also worked with Dorrance Publishing to produce print ready graphics and artwork.",
         icon: "lucide:store",
     },
 ]);
@@ -175,8 +182,8 @@ export const contactInfo = {
     socials: [
         {
             platform: "Bluesky",
-            label: "@yourhandle",
-            url: "https://x.com/yourhandle",
+            label: "@ragamuffkinz.bsky.social",
+            url: "https://bsky.app/profile/ragamuffkinz.bsky.social",
             icon: "simple-icons:bluesky",
         },
         {
@@ -186,29 +193,18 @@ export const contactInfo = {
             icon: "lucide:mail"
         },
         {
-            platform: "Etsy",
-            label: "yourshop",
-            url: "https://etsy.com/shop/yourshop",
-            icon: "simple-icons:etsy",
-        },
-        {
             platform: "Instagram",
-            label: "@yourhandle",
-            url: "https://instagram.com/yourhandle",
+            label: "@ragamuffkinz",
+            url: "https://www.instagram.com/ragamuffkinz?rpxt=ajEwNmF1bmx1OWdu&utm_source=qr",
             icon: "simple-icons:instagram",
         },
 
         {
             platform: "Ko-fi",
-            label: "ko-fi.com/yourname",
-            url: "https://ko-fi.com/yourname",
+            label: "ko-fi.com/ragamuffkinz",
+            url: "https://ko-fi.com/ragamuffkinz",
             icon: "simple-icons:kofi",
         },
-        {
-            platform: "TikTok",
-            label: "@yourhandle",
-            url: "https://tiktok.com/@yourhandle",
-            icon: "simple-icons:tiktok",
-        },
+      
     ],
 };
