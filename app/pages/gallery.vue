@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pb-8">
         <UPageHero
             id="top"
             :headline="heroInfo.headline"

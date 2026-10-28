@@ -2,7 +2,7 @@ import type { ButtonProps } from "@nuxt/ui";
 import type { HeroInfo } from "~/types/contentTypes";
 
 export const heroImage =
-    "https://unsplash.com/photos/6fx4MkEMPto/download?force=true&w=800";
+    "/splash_page_graphic.jpg";
 
 export const heroInfo: HeroInfo = {
     headline: "Artist · Designs · Products",
